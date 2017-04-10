@@ -151,6 +151,10 @@ class ConfigMenu(menu):
                     self._configurable.get_name(),
                     self._options)
 
+                # replace a plugin object if it already exists
+                for i, plugin in enumerate(self._w3af.plugins.plugins[self._configurable.get_type()]):
+                    if plugin.get_name() == self._configurable.get_name():
+                        self._w3af.plugins.plugins[self._configurable.get_type()][i] = self._configurable
         except BaseFrameworkException, e:
             msg = 'Identified an error with the user-defined settings:\n\n'\
                   '    - %s \n\n'\
